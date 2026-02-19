@@ -20,6 +20,7 @@
 
 
   <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/faq.css" />
   <!-- OVERRIDE CSS FOR CONTACT LAYOUT FIX (ALIVE V5) -->
   <link rel="stylesheet" href="/contact-override.css" />
 </head>
@@ -428,6 +429,98 @@
   </section>
 
   <div class="section-divider"></div>
+
+  <!-- ═══════════════════ FAQ SECTION ═══════════════════════════ -->
+  <section class="section" id="faq">
+    <div class="scanlines" aria-hidden="true"></div>
+    <div class="section__particles" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="ambient-orb ambient-orb--sky" style="width:300px;height:300px;top:100px;left:-50px;" aria-hidden="true">
+    </div>
+
+    <div class="container">
+      <div class="section__label reveal">FAQ</div>
+      <h2 class="section__heading reveal">Frequently Asked <br /><span class="accent">Questions</span></h2>
+
+      <div class="faq__grid">
+        <!-- Q1 -->
+        <div class="faq-item reveal">
+          <button class="faq-item__question" aria-expanded="false">
+            <span class="faq-item__text">Do you handle the full development lifecycle?</span>
+            <span class="faq-item__icon"><i data-lucide="plus"></i></span>
+          </button>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner">
+              <p>Yes. As a senior full-stack developer, I architect the database, build the backend API, craft the
+                frontend UI, and handle the final deployment to edge networks. I own the entire pipeline from <span
+                  class="mono">git init</span> to production.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="faq-item reveal">
+          <button class="faq-item__question" aria-expanded="false">
+            <span class="faq-item__text">How do you ensure application performance?</span>
+            <span class="faq-item__icon"><i data-lucide="plus"></i></span>
+          </button>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner">
+              <p>I design for scale from day one. I use Next.js for server-side rendering, implement Row Level Security
+                in PostgreSQL, use Redis for caching, and deploy to Cloudflare's edge network. My systems are built to
+                handle high traffic without breaking a sweat.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="faq-item reveal">
+          <button class="faq-item__question" aria-expanded="false">
+            <span class="faq-item__text">Can you work with my existing codebase?</span>
+            <span class="faq-item__icon"><i data-lucide="plus"></i></span>
+          </button>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner">
+              <p>Absolutely. I specialize in refactoring legacy code and seamless migrations. I can audit your current
+                system, identify bottlenecks, and incrementally modernize your stack without disrupting business
+                operations.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="faq-item reveal">
+          <button class="faq-item__question" aria-expanded="false">
+            <span class="faq-item__text">How do you handle security?</span>
+            <span class="faq-item__icon"><i data-lucide="plus"></i></span>
+          </button>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner">
+              <p>Security is not an afterthought; it's a core discipline. I implement strict RLS (Row Level Security)
+                policies, secure environment variable handling, API rate limiting, and input validation (Zod) to prevent
+                SQL injection and XSS attacks.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="faq-item reveal">
+          <button class="faq-item__question" aria-expanded="false">
+            <span class="faq-item__text">Do you provide post-launch support?</span>
+            <span class="faq-item__icon"><i data-lucide="plus"></i></span>
+          </button>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner">
+              <p>Yes. A deployment is just the beginning. I offer maintenance packages that include monitoring, security
+                updates, and feature scaling. I build systems that are easy to maintain, but I'm always available to
+                ensure they stay bulletproof.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ═══════════════════ CONTACT FORM ═══════════════════════════ -->
   <section class="section contact-section" id="contact-form">
