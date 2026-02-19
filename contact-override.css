@@ -1,0 +1,34 @@
+/* =================================================================
+   FORCED OVERRIDE: CLEAN CONTACT FORM (Characters Removed)
+   ================================================================= */
+
+/* 1. LAYOUT: Centered Form */
+.contact__layout {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    max-width: 600px !important;
+    /* Standard centered form width */
+}
+
+/* Hide characters (just in case they exist in DOM) */
+.contact-chars {
+    display: none !important;
+}
+
+/* Ensure Form takes full width of its container */
+.contact-form-wrap {
+    flex: 1 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contact__layout {
+        padding: 0 20px !important;
+    }
+}

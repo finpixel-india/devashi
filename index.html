@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
-    content="Ashish Singh — Senior Full-Stack Developer. System architect, database engineer, and edge deployment specialist." />
+    content="AshishSingh — Senior Full-Stack Developer. System architect, database engineer, and edge deployment specialist." />
   <title>Ashish Singh — Senior Developer</title>
 
   <!-- Fonts -->
@@ -20,6 +20,8 @@
 
 
   <link rel="stylesheet" href="/style.css" />
+  <!-- OVERRIDE CSS FOR CONTACT LAYOUT FIX (ALIVE V5) -->
+  <link rel="stylesheet" href="/contact-override.css" />
 </head>
 
 <body>
@@ -391,170 +393,13 @@
     </div>
   </section>
 
-  <div class="section-divider"></div>
-
-  <!-- ═══════════════════ ENGINEERING PHILOSOPHY ═════════════ -->
-  <section class="section" id="philosophy">
-    <div class="scanlines" aria-hidden="true"></div>
-    <div class="ambient-orb ambient-orb--sky" style="width:350px;height:350px;bottom:-100px;right:10%;"
-      aria-hidden="true"></div>
-
-    <div class="container">
-      <div class="section__label reveal">PHILOSOPHY</div>
-      <h2 class="section__heading reveal">Engineering<br /><span class="accent">Mindset & Principles</span></h2>
-
-      <div class="philosophy__grid">
-        <div class="philosophy-card reveal">
-          <div class="philosophy-card__number">01</div>
-          <div class="philosophy-card__icon"><i data-lucide="shield-alert"></i></div>
-          <h3 class="philosophy-card__title">Assume Failure. Build Fallbacks.</h3>
-          <p class="philosophy-card__desc">Every external API will timeout. Every database query will face a deadlock. I
-            don't hope for the best — I engineer for the worst. Every system I ship has graceful degradation, retry
-            logic, and meaningful error boundaries.</p>
-        </div>
-
-        <div class="philosophy-card reveal">
-          <div class="philosophy-card__number">02</div>
-          <div class="philosophy-card__icon"><i data-lucide="code-2"></i></div>
-          <h3 class="philosophy-card__title">Clean Code Over Clever Code.</h3>
-          <p class="philosophy-card__desc">A one-liner nobody can debug at 3 AM is a liability, not a feature. I write
-            code that reads like documentation — self-explanatory names, single-responsibility functions, and comments
-            that explain <em>why</em>, not <em>what</em>.</p>
-        </div>
-
-        <div class="philosophy-card reveal">
-          <div class="philosophy-card__number">03</div>
-          <div class="philosophy-card__icon"><i data-lucide="bug"></i></div>
-          <h3 class="philosophy-card__title">Debug the Environment, Not Just the Code.</h3>
-          <p class="philosophy-card__desc">The hardest bugs live between systems — misconfigured environment variables,
-            silent CORS failures, edge-network caching stale secrets. I diagnose at the infrastructure level first,
-            because the code is often correct; it's the deployment context that's lying.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="section-divider"></div>
-
-  <!-- ═══════════════════ PROJECT SHOWCASE ═══════════════════ -->
-  <section class="section" id="projects">
-    <div class="scanlines" aria-hidden="true"></div>
-    <div class="section__particles" aria-hidden="true">
-      <span></span><span></span><span></span><span></span><span></span><span></span>
-    </div>
-    <div class="ambient-orb ambient-orb--gold" style="width:500px;height:500px;top:10%;left:-200px;" aria-hidden="true">
-    </div>
-    <div class="ambient-orb ambient-orb--purple" style="width:350px;height:350px;bottom:5%;right:-150px;"
-      aria-hidden="true"></div>
-
-    <div class="container">
-      <div class="section__label reveal">PROJECTS</div>
-      <h2 class="section__heading reveal">Featured<br /><span class="accent">Case Studies</span></h2>
-
-      <div class="projects__grid">
-        <article class="project-card reveal">
-          <div class="project-card__header">
-            <span class="project-card__role">Lead Developer</span>
-            <h3 class="project-card__title">Enterprise Dashboard Platform</h3>
-          </div>
-          <div class="project-card__body">
-            <div class="project-card__section">
-              <h4><i data-lucide="target"></i> The Business Problem</h4>
-              <p>A mid-size logistics company needed a real-time operations dashboard aggregating data from 5+ internal
-                APIs, with role-based access for 200+ employees across 3 departments.</p>
-            </div>
-            <div class="project-card__section">
-              <h4><i data-lucide="cpu"></i> Technical Stack</h4>
-              <div class="project-card__tags">
-                <span>Next.js
-                  15</span><span>Supabase</span><span>PostgreSQL</span><span>Tailwind</span><span>Cloudflare</span>
-              </div>
-            </div>
-            <div class="project-card__section">
-              <h4><i data-lucide="network"></i> Architecture</h4>
-              <p>SSR with Next.js App Router feeding real-time Supabase subscriptions. PostgreSQL with RLS enforcing
-                department-level data isolation. Edge-deployed on Cloudflare.</p>
-            </div>
-            <div class="project-card__section project-card__section--war">
-              <h4><i data-lucide="swords"></i> The War Story</h4>
-              <p>API keys silently failing on Cloudflare's edge runtime — variables weren't forwarded to server
-                components at build time. App worked locally, empty data in production. Fix: explicit runtime scoping
-                with <span class="mono">NEXT_PUBLIC_</span> prefix patterns and server-only secret injection.</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="project-card reveal">
-          <div class="project-card__header">
-            <span class="project-card__role">Solo Architect</span>
-            <h3 class="project-card__title">Secure Client Portal & CRM</h3>
-          </div>
-          <div class="project-card__body">
-            <div class="project-card__section">
-              <h4><i data-lucide="target"></i> The Business Problem</h4>
-              <p>A consulting firm required a client-facing portal for request submission, project tracking, and
-                automated email notifications — with strict inter-client data privacy.</p>
-            </div>
-            <div class="project-card__section">
-              <h4><i data-lucide="cpu"></i> Technical Stack</h4>
-              <div class="project-card__tags">
-                <span>React.js</span><span>Supabase Auth</span><span>PostgreSQL</span><span>SMTP</span><span>Framer
-                  Motion</span>
-              </div>
-            </div>
-            <div class="project-card__section">
-              <h4><i data-lucide="network"></i> Architecture</h4>
-              <p>React SPA with Supabase Auth magic-link login. PostgreSQL RLS ensuring Client A cannot see Client B's
-                data. DB triggers firing Edge Functions for transactional emails.</p>
-            </div>
-            <div class="project-card__section project-card__section--war">
-              <h4><i data-lucide="swords"></i> The War Story</h4>
-              <p>Email triggers silently failing — Edge Function executed but emails never arrived. Root cause: SMTP
-                provider rejected Supabase's edge IP range (SPF misalignment). Fix: custom SMTP relay with proper
-                SPF/DKIM/DMARC records + dead-letter logging.</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="project-card reveal">
-          <div class="project-card__header">
-            <span class="project-card__role">Full-Stack Developer</span>
-            <h3 class="project-card__title">High-Performance Portfolio Engine</h3>
-          </div>
-          <div class="project-card__body">
-            <div class="project-card__section">
-              <h4><i data-lucide="target"></i> The Business Problem</h4>
-              <p>Build a developer portfolio that isn't just a static page — a high-performance interactive experience
-                with cursor-tracking animations and a perfect Lighthouse score.</p>
-            </div>
-            <div class="project-card__section">
-              <h4><i data-lucide="cpu"></i> Technical Stack</h4>
-              <div class="project-card__tags">
-                <span>Vite</span><span>Vanilla JS</span><span>CSS Masks</span><span>SVG</span><span>rAF</span>
-              </div>
-            </div>
-            <div class="project-card__section">
-              <h4><i data-lucide="network"></i> Architecture</h4>
-              <p>Zero-framework approach for max performance. CSS custom properties driven by rAF loop for 60fps mask
-                animations. SVG topographic patterns with CSS keyframe animations.</p>
-            </div>
-            <div class="project-card__section project-card__section--war">
-              <h4><i data-lucide="swords"></i> The War Story</h4>
-              <p>CSS <span class="mono">mask-image</span> with <span class="mono">radial-gradient</span> caused full
-                layer recomposites each frame. Fix: moved mask coordinates to CSS custom properties updated via <span
-                  class="mono">style.setProperty()</span>, isolating changes to compositing layer only.</p>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
 
   <!-- ═══════════════════ FOOTER ═════════════════════════════ -->
-  <!-- ═══════════════════ CTA + CODE WINDOW ═══════════════════ -->
-  <section class="cta-code-section">
+  <!-- ═══════════════════ CTA + CODE WINDOW (PROJECTS) ═══════════════════ -->
+  <section class="cta-code-section" id="projects">
     <div class="container">
+      <div class="section__label reveal">PROJECTS</div>
+      <h2 class="section__heading reveal">Experimental &<br /><span class="accent">Interactive Works</span></h2>
 
       <!-- Code Typing Window -->
       <div class="code-window">
@@ -571,14 +416,120 @@
 
       <!-- Robot CTA Button -->
       <div class="robot-cta">
-        <a href="/robot.html" class="robot-cta__btn" target="_blank">
+        <a href="/robot.html" class="robot-cta__btn">
           <span class="robot-cta__icon">🤖</span>
-          <span class="robot-cta__text">See the Futuristic Robot</span>
+          <span class="robot-cta__text">Futuristic Robot</span>
           <span class="robot-cta__arrow">→</span>
         </a>
         <p class="robot-cta__hint">Interactive 3D experience · Drag to explore</p>
       </div>
 
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ═══════════════════ CONTACT FORM ═══════════════════════════ -->
+  <section class="section contact-section" id="contact-form">
+    <div class="scanlines" aria-hidden="true"></div>
+    <div class="section__particles" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="ambient-orb ambient-orb--gold" style="width:400px;height:400px;top:-80px;left:-150px;"
+      aria-hidden="true"></div>
+    <div class="ambient-orb ambient-orb--purple" style="width:300px;height:300px;bottom:-60px;right:-100px;"
+      aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="section__label reveal">CONTACT</div>
+      <h2 class="section__heading reveal">Let's Build<br /><span class="accent">Something Great</span></h2>
+
+      <div class="contact__layout">
+        <!-- Animated Characters — LEFT SIDE -->
+        <div class="contact-chars" id="contactChars" data-char-state="idle">
+          <svg class="contact-chars__svg" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- 
+              SIDE BY SIDE ALIGNMENT (User Requested Order)
+              Total Width: 500px to spread them out.
+              Order: 
+              1. ORANGE (Leftmost)
+              2. PURPLE (Next)
+              3. DARK (Next)
+              4. YELLOW (Rightmost)
+            -->
+
+            <!-- 1. ORANGE (Left aligned) -->
+            <g class="char char--orange" transform="translate(10, 150)">
+              <path class="char__body" d="M0,150 L0,90 Q0,0 100,0 Q200,0 200,90 L200,150 Z" fill="#E8651A" />
+              <circle class="char__eye" cx="70" cy="65" r="5" fill="#5C2300" />
+              <circle class="char__eye" cx="130" cy="65" r="5" fill="#5C2300" />
+              <path class="char__mouth" d="M90,105 Q100,115 110,105" fill="none" stroke="#5C2300" stroke-width="3"
+                stroke-linecap="round" />
+            </g>
+
+            <!-- 2. PURPLE (Behind Orange but visible next to it) -->
+            <g class="char char--purple" transform="translate(150, 40)">
+              <rect class="char__body" x="0" y="0" width="100" height="260" rx="10" fill="#6C3CE0" />
+              <circle class="char__eye char__eye--l" cx="35" cy="70" r="5" fill="#fff" />
+              <circle class="char__pupil char__pupil--l" cx="38" cy="70" r="2.5" fill="#1a1a2e" />
+              <circle class="char__eye char__eye--r" cx="65" cy="70" r="5" fill="#fff" />
+              <circle class="char__pupil char__pupil--r" cx="68" cy="70" r="2.5" fill="#1a1a2e" />
+              <path class="char__mouth" d="M50,110 L50,130" fill="none" stroke="#2e1065" stroke-width="3"
+                stroke-linecap="round" />
+            </g>
+
+            <!-- 3. DARK (Next to Purple) -->
+            <g class="char char--dark" transform="translate(260, 90)">
+              <rect class="char__body" x="0" y="0" width="90" height="210" rx="8" fill="#1a1a2e" />
+              <circle class="char__eye char__eye--l" cx="30" cy="50" r="5" fill="#fff" />
+              <circle class="char__pupil char__pupil--l" cx="33" cy="50" r="2.5" fill="#000" />
+              <circle class="char__eye char__eye--r" cx="60" cy="50" r="5" fill="#fff" />
+              <circle class="char__pupil char__pupil--r" cx="63" cy="50" r="2.5" fill="#000" />
+              <path class="char__mouth" d="M40,90 Q45,95 50,90" fill="none" stroke="rgba(255,255,255,0.3)"
+                stroke-width="2.5" stroke-linecap="round" />
+            </g>
+
+            <!-- 4. YELLOW (Rightmost) -->
+            <g class="char char--yellow" transform="translate(360, 130)">
+              <path class="char__body" d="M20,170 L20,60 Q20,0 70,0 Q120,0 120,60 L120,170 L20,170 Q0,170 0,150 Z"
+                fill="#F5C518" />
+              <circle class="char__eye" cx="70" cy="50" r="5" fill="#000" />
+              <path class="char__mouth" d="M80,90 L95,90" fill="none" stroke="#000" stroke-width="3"
+                stroke-linecap="round" />
+            </g>
+          </svg>
+        </div>
+
+        <!-- Contact Form — RIGHT SIDE -->
+        <div class="contact-form-wrap reveal">
+          <form class="contact-form" id="contactFormEl" autocomplete="off">
+            <div class="contact-form__group">
+              <label class="contact-form__label" for="contactName">Name</label>
+              <input class="contact-form__input" type="text" id="contactName" name="name" placeholder="Your name"
+                required />
+            </div>
+            <div class="contact-form__group">
+              <label class="contact-form__label" for="contactEmail">Email</label>
+              <input class="contact-form__input" type="email" id="contactEmail" name="email"
+                placeholder="you@example.com" required />
+            </div>
+            <div class="contact-form__group">
+              <label class="contact-form__label" for="contactMessage">Message</label>
+              <textarea class="contact-form__textarea" id="contactMessage" name="message"
+                placeholder="Tell me about your project…" rows="5" required></textarea>
+            </div>
+            <button class="contact-form__btn" type="submit" id="contactSubmitBtn">
+              <span class="contact-form__btn-text">Send Message</span>
+              <span class="contact-form__btn-arrow">→</span>
+            </button>
+          </form>
+          <!-- Success Overlay -->
+          <div class="contact-form__success" id="contactSuccess">
+            <span class="contact-form__success-icon">✓</span>
+            <p class="contact-form__success-text">Message sent! I'll get back to you soon.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -597,8 +548,8 @@
           <a href="#about">About</a>
           <a href="#specialties">Specialties</a>
           <a href="#arsenal">Arsenal</a>
-          <a href="#philosophy">Philosophy</a>
           <a href="#projects">Projects</a>
+          <a href="#contact-form">Contact</a>
         </div>
         <div class="footer__connect">
           <h4>Connect</h4>

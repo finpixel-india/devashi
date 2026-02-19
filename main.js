@@ -445,4 +445,162 @@ if (window.lucide) {
     window.lucide.createIcons();
 }
 
+// ═══════════════════════════════════════════════════════════════
+//  CONTACT FORM — Character Animation System (ALIVE V2)
+// ═══════════════════════════════════════════════════════════════
+(function initContactForm() {
+    const charsEl = document.getElementById('contactChars');
+    const formEl = document.getElementById('contactFormEl');
+    const nameInput = document.getElementById('contactName');
+    const emailInput = document.getElementById('contactEmail');
+    const messageInput = document.getElementById('contactMessage');
+    const submitBtn = document.getElementById('contactSubmitBtn');
+    const successEl = document.getElementById('contactSuccess');
 
+    if (!charsEl || !formEl) return;
+
+    let activeField = null;
+    let isHovering = false;
+    let blinkTimers = [];
+
+    // ─── Set character state ──────────────────────────────────────
+    function setCharState(state) {
+        charsEl.setAttribute('data-char-state', state);
+    }
+
+    // ─── Global Mouse Tracking (Eyes follow cursor) ───────────────
+    // This makes them feel "Alive" and "Watching"
+    document.addEventListener('mousemove', (e) => {
+        // Only track if not focused on input (input has its own tracking)
+        if (activeField) return;
+
+        // Get center of characters
+        const rect = charsEl.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        // Calculate offset from center
+        const dx = e.clientX - centerX;
+        const dy = e.clientY - centerY;
+
+        // Limit the movement range (max 8px eye shift)
+        // Using atan2 for angle, distance clamping for magnitude
+        const angle = Math.atan2(dy, dx);
+        const dist = Math.min(Math.sqrt(dx * dx + dy * dy), 300); // 300px radius of influence
+
+        // Map distance 0-300 to shift 0-8
+        const shift = (dist / 300) * 8;
+
+        const moveX = Math.cos(angle) * shift;
+        const moveY = Math.sin(angle) * shift;
+
+        charsEl.style.setProperty('--pupil-x', `${moveX.toFixed(1)}px`);
+        charsEl.style.setProperty('--pupil-y', `${moveY.toFixed(1)}px`);
+    });
+
+    // ─── Focus / Blur handlers ────────────────────────────────────
+    function onFieldFocus(field) {
+        activeField = field;
+        isHovering = false;
+        setCharState(field);
+
+        // When focusing, look slightly down-right towards form
+        charsEl.style.setProperty('--pupil-x', '6px');
+        charsEl.style.setProperty('--pupil-y', '2px');
+    }
+
+    function onFieldBlur(e) {
+        activeField = null;
+        if (isHovering) return;
+
+        if (!e.target.value.trim() && e.target.hasAttribute('required')) {
+            setCharState('sad'); // Disappointed
+        } else {
+            setCharState('idle');
+        }
+    }
+
+    // Attach listeners
+    [nameInput, emailInput, messageInput].forEach(input => {
+        const fieldName = input.name;
+        input.addEventListener('focus', () => onFieldFocus(fieldName));
+        input.addEventListener('blur', onFieldBlur);
+    });
+
+    // ─── Message typing — eyes track horizontally ─────────────────
+    messageInput.addEventListener('input', () => {
+        if (activeField !== 'message') return;
+
+        const text = messageInput.value;
+        const len = text.length;
+
+        // Scan back and forth
+        const scan = (len % 50) / 25; // 0 to 2
+        const xPos = scan > 1 ? (2 - scan) * 10 : scan * 10; // Triangle wave 0->10->0
+
+        charsEl.style.setProperty('--pupil-x', `${(xPos + 2).toFixed(1)}px`); // range 2 to 12
+        charsEl.style.setProperty('--pupil-y', '2px');
+    });
+
+    // ─── Submit button hover ──────────────────────────────────────
+    submitBtn.addEventListener('mouseenter', () => {
+        if (activeField) return;
+        isHovering = true;
+        setCharState('hover');
+        // Look Excited (Up)
+        charsEl.style.setProperty('--pupil-x', '0px');
+        charsEl.style.setProperty('--pupil-y', '-6px');
+    });
+
+    submitBtn.addEventListener('mouseleave', () => {
+        isHovering = false;
+        if (!activeField) {
+            setCharState('idle');
+        } else {
+            setCharState(activeField);
+        }
+    });
+
+    // ─── Form submit ──────────────────────────────────────────────
+    formEl.addEventListener('submit', (e) => {
+        e.preventDefault();
+        setCharState('success');
+        successEl.classList.add('is-visible');
+        setTimeout(() => {
+            successEl.classList.remove('is-visible');
+            formEl.reset();
+            setCharState('idle');
+        }, 4000);
+    });
+
+    // ─── Blink System ─────────────────────────────────────────────
+    const chars = charsEl.querySelectorAll('.char');
+
+    function triggerBlink(charEl) {
+        charEl.classList.add('is-blinking');
+        // Match CSS animation duration (0.15s)
+        setTimeout(() => charEl.classList.remove('is-blinking'), 150);
+    }
+
+    function scheduleRandomBlinks() {
+        chars.forEach((charEl) => {
+            function blinkLoop() {
+                // Random interval 2s to 6s
+                const delay = 2000 + Math.random() * 4000;
+                const timer = setTimeout(() => {
+                    const state = charsEl.getAttribute('data-char-state');
+                    // Blink unless 'success' (wide eyed)
+                    if (state !== 'success') {
+                        triggerBlink(charEl);
+                    }
+                    blinkLoop();
+                }, delay);
+                blinkTimers.push(timer);
+            }
+            blinkLoop();
+        });
+    }
+
+    scheduleRandomBlinks();
+
+})();

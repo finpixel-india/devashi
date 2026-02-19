@@ -1477,6 +1477,882 @@ body {
 
 
 /* ══════════════════════════════════════════════════════════════
+   CONTACT FORM + ANIMATED CHARACTERS (REDESIGN)
+   ══════════════════════════════════════════════════════════════ */
+.contact-section {
+  padding-bottom: clamp(60px, 8vh, 100px);
+}
+
+.contact__layout {
+  /* Widen container to ensure side-by-side fits comfortably */
+  max-width: 1100px;
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  /* Force side-by-side */
+  align-items: center;
+  /* Vertically center */
+  justify-content: space-between;
+  /* Push Chars Left, Form Right */
+  gap: 40px;
+}
+
+/* ─── Animated Characters (Left Side) ────────────────────────── */
+.contact-chars {
+  flex: 0 0 280px;
+  width: 280px;
+  position: relative;
+  z-index: 2;
+}
+
+.contact-chars__svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+  /* Make them float slightly as a group */
+  animation: groupFloat 6s ease-in-out infinite;
+}
+
+@keyframes groupFloat {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Character Base Styles */
+.char__body {
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Idle breathing (individual offsets) */
+.char--purple {
+  animation: charBreathe 4s ease-in-out infinite 0s;
+}
+
+.char--orange {
+  animation: charBreathe 4.2s ease-in-out infinite 0.5s;
+}
+
+.char--dark {
+  animation: charBreathe 3.8s ease-in-out infinite 1s;
+}
+
+.char--yellow {
+  animation: charBreathe 4.1s ease-in-out infinite 0.2s;
+}
+
+@keyframes charBreathe {
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-3px) scale(1.02);
+  }
+}
+
+/* Eyes & Pupils */
+.char__pupil {
+  transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ─── Interaction States ─────────────────────────────────────── */
+
+/* Mouth Transitions */
+.char__mouth {
+  transition: d 0.3s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.3s;
+}
+
+/* 1. FOCUS ANY FIELD: Eyes look at form (LEFT) */
+[data-char-state="name"] .char__pupil,
+[data-char-state="email"] .char__pupil {
+  transform: translate(-4px, 1px);
+}
+
+/* Message: Eyes track horizontally using variable */
+[data-char-state="message"] .char__pupil {
+  transform: translate(var(--pupil-x, -4px), 1px);
+}
+
+/* 2. SAD STATE: Empty field on blur */
+[data-char-state="sad"] .char__pupil {
+  transform: translateY(3px);
+  /* Look down sadly */
+}
+
+[data-char-state="sad"] .char--purple .char__mouth {
+  d: path("M108,114 Q115,106 122,114");
+}
+
+[data-char-state="sad"] .char--orange .char__mouth {
+  d: path("M60,276 Q67.5,268 75,276");
+}
+
+[data-char-state="sad"] .char--dark .char__mouth {
+  d: path("M148,202 Q155,194 162,202");
+}
+
+[data-char-state="sad"] .char--yellow .char__mouth {
+  d: path("M215,224 Q225.5,216 236,224");
+}
+
+/* 3. HOVER SEND: Anticipation (eyes wide, slight jump up) */
+[data-char-state="hover"] .char__body {
+  transform: translateY(-5px) scale(1.05);
+}
+
+[data-char-state="hover"] .char__pupil {
+  transform: translate(0, -2px);
+  /* Look slightly up/alert */
+}
+
+/* 4. SUCCESS: Happy Jump + Smile! */
+[data-char-state="success"] .char--purple {
+  animation: jumpHappy 0.6s ease infinite alternate;
+}
+
+[data-char-state="success"] .char--orange {
+  animation: jumpHappy 0.5s ease infinite alternate 0.1s;
+}
+
+[data-char-state="success"] .char--dark {
+  animation: jumpHappy 0.7s ease infinite alternate 0.2s;
+}
+
+[data-char-state="success"] .char--yellow {
+  animation: jumpHappy 0.55s ease infinite alternate 0.05s;
+}
+
+[data-char-state="success"] .char__mouth {
+  stroke: #fff;
+  stroke-width: 3;
+}
+
+[data-char-state="success"] .char--purple .char__mouth {
+  d: path("M108,110 Q115,118 122,110");
+}
+
+[data-char-state="success"] .char--orange .char__mouth {
+  d: path("M60,272 Q67.5,280 75,272");
+}
+
+[data-char-state="success"] .char--dark .char__mouth {
+  d: path("M148,198 Q155,206 162,198");
+}
+
+[data-char-state="success"] .char--yellow .char__mouth {
+  d: path("M215,220 Q225.5,228 236,220");
+}
+
+@keyframes jumpHappy {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-20px);
+  }
+}
+
+[data-char-state="hover"] .char__pupil {
+  transform: translate(0, -2px);
+  /* Look slightly up/alert */
+}
+
+/* 3. SUCCESS: Party Time! */
+[data-char-state="success"] .char--purple {
+  animation: jumpHappy 0.6s ease infinite alternate;
+}
+
+[data-char-state="success"] .char--orange {
+  animation: jumpHappy 0.5s ease infinite alternate 0.1s;
+}
+
+[data-char-state="success"] .char--dark {
+  animation: jumpHappy 0.7s ease infinite alternate 0.2s;
+}
+
+[data-char-state="success"] .char--yellow {
+  animation: jumpHappy 0.55s ease infinite alternate 0.05s;
+}
+
+@keyframes jumpHappy {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-20px);
+  }
+}
+
+/* ─── Contact Form (Right Side) ──────────────────────────────── */
+.contact-form-wrap {
+  flex: 1;
+  max-width: 500px;
+  position: relative;
+  background: rgba(15, 15, 20, 0.6);
+  /* Slightly more transparent */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  /* More subtle border */
+  border-radius: 24px;
+  /* More rounded */
+  padding: 40px;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-form__label {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+}
+
+.contact-form__input,
+.contact-form__textarea {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 16px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: #fff;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.contact-form__input:focus,
+.contact-form__textarea:focus {
+  background: rgba(0, 0, 0, 0.4);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.contact-form__textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+/* Submit Button */
+.contact-form__btn {
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 18px 32px;
+  background: #fff;
+  /* White button for contrast */
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 0 #ccc;
+  /* Chunky 3D feel */
+}
+
+.contact-form__btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #ccc;
+  background: var(--gold);
+  /* Gold on hover */
+}
+
+.contact-form__btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #ccc;
+}
+
+.contact-form__btn-arrow {
+  font-weight: bold;
+}
+
+/* Success Overlay */
+.contact-form__success {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 15, 20, 0.98);
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.contact-form__success.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.contact-form__success-icon {
+  width: 60px;
+  height: 60px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  :root {
+    --mask-size: 200px;
+  }
+
+  .about__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about__stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .arsenal__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card__body {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --mask-size: 160px;
+  }
+
+  .hero-img {
+    height: 80vh;
+  }
+
+  .hero__name-first,
+  .hero__name-last {
+    font-size: clamp(1.4rem, 5vw, 2rem);
+  }
+
+  .specialties__grid,
+  .philosophy__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about__stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .hero__badge {
+    display: none;
+  }
+
+  /* Contact Form Mobile: Column Layout */
+  .contact__layout {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* On mobile, characters peek from behind/top */
+  .contact-chars {
+    width: 200px;
+    /* smaller on mobile */
+    height: 180px;
+    margin-bottom: -40px;
+    /* negative margin to overlap form */
+    z-index: 0;
+  }
+
+  .contact-form-wrap {
+    width: 100%;
+    z-index: 2;
+    padding: 24px;
+  }
+}
+
+.contact__layout {
+  max-width: 620px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* ─── Animated Characters ─────────────────────────────────────── */
+.contact-chars {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: -10px;
+  position: relative;
+  z-index: 2;
+}
+
+.contact-chars__svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+/* Character bodies — idle breathing */
+.char {
+  animation: charBreathe 4s ease-in-out infinite;
+}
+
+.char--tall {
+  animation-delay: 0s;
+}
+
+.char--semi {
+  animation-delay: 0.6s;
+}
+
+.char--small {
+  animation-delay: 1.2s;
+}
+
+@keyframes charBreathe {
+
+  0%,
+  100% {
+    transform: var(--char-translate, translate(60px, 30px)) translateY(0px);
+  }
+
+  50% {
+    transform: var(--char-translate, translate(60px, 30px)) translateY(-4px);
+  }
+}
+
+/* Use CSS custom properties for each character's base transform */
+.char--tall {
+  --char-translate: translate(60px, 30px);
+}
+
+.char--semi {
+  --char-translate: translate(140px, 55px);
+}
+
+.char--small {
+  --char-translate: translate(240px, 85px);
+}
+
+/* ─── Eye Pupils — smooth transitions ────────────────────────── */
+.char__pupil {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    r 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.char__pupil-glint {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Blink overlay ──────────────────────────────────────────── */
+.char__blink {
+  transition: opacity 0.08s ease;
+  pointer-events: none;
+}
+
+.char.is-blinking .char__blink {
+  opacity: 1;
+}
+
+/* ─── State: NAME — eyes look down-left toward name field ───── */
+[data-char-state="name"] .char__pupil {
+  transform: translate(-2px, 3px);
+}
+
+[data-char-state="name"] .char__pupil-glint {
+  transform: translate(-2px, 3px);
+}
+
+[data-char-state="name"] .char--small {
+  animation: charBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 1;
+}
+
+@keyframes charBounce {
+
+  0%,
+  100% {
+    transform: translate(240px, 85px) translateY(0);
+  }
+
+  40% {
+    transform: translate(240px, 85px) translateY(-10px);
+  }
+
+  70% {
+    transform: translate(240px, 85px) translateY(-3px);
+  }
+}
+
+/* ─── State: EMAIL — eyes look down-center ───────────────────── */
+[data-char-state="email"] .char__pupil {
+  transform: translate(0px, 3px);
+}
+
+[data-char-state="email"] .char__pupil-glint {
+  transform: translate(0px, 3px);
+}
+
+/* ─── State: MESSAGE — eyes look down, JS adjusts horizontal ── */
+[data-char-state="message"] .char__pupil {
+  transform: translate(var(--pupil-x, 0px), 3px);
+}
+
+[data-char-state="message"] .char__pupil-glint {
+  transform: translate(var(--pupil-x, 0px), 3px);
+}
+
+/* ─── State: HOVER (submit button) — eyes widen ─────────────── */
+[data-char-state="hover"] .char__pupil {
+  transform: translate(0px, 4px);
+}
+
+[data-char-state="hover"] .char__pupil-glint {
+  transform: translate(0px, 4px);
+}
+
+[data-char-state="hover"] .char__eye {
+  transition: ry 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-char-state="hover"] .char--tall .char__eye {
+  ry: 10;
+}
+
+[data-char-state="hover"] .char--semi .char__eye {
+  ry: 9;
+}
+
+[data-char-state="hover"] .char--small .char__eye {
+  ry: 8;
+}
+
+/* ─── State: SUCCESS — happy jump ────────────────────────────── */
+[data-char-state="success"] .char--tall {
+  animation: charJump1 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 1;
+}
+
+[data-char-state="success"] .char--semi {
+  animation: charJump2 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s 1;
+}
+
+[data-char-state="success"] .char--small {
+  animation: charJump3 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s 1;
+}
+
+[data-char-state="success"] .char__mouth {
+  stroke: var(--gold);
+  stroke-width: 2;
+  transition: d 0.3s, stroke 0.3s;
+}
+
+@keyframes charJump1 {
+
+  0%,
+  100% {
+    transform: translate(60px, 30px) translateY(0) rotate(0deg);
+  }
+
+  35% {
+    transform: translate(60px, 30px) translateY(-20px) rotate(-5deg);
+  }
+
+  65% {
+    transform: translate(60px, 30px) translateY(-8px) rotate(3deg);
+  }
+}
+
+@keyframes charJump2 {
+
+  0%,
+  100% {
+    transform: translate(140px, 55px) translateY(0) rotate(0deg);
+  }
+
+  35% {
+    transform: translate(140px, 55px) translateY(-22px) rotate(4deg);
+  }
+
+  65% {
+    transform: translate(140px, 55px) translateY(-6px) rotate(-2deg);
+  }
+}
+
+@keyframes charJump3 {
+
+  0%,
+  100% {
+    transform: translate(240px, 85px) translateY(0) rotate(0deg);
+  }
+
+  35% {
+    transform: translate(240px, 85px) translateY(-18px) rotate(-6deg);
+  }
+
+  65% {
+    transform: translate(240px, 85px) translateY(-5px) rotate(2deg);
+  }
+}
+
+/* ─── Idle random look ───────────────────────────────────────── */
+[data-char-state="idle"] .char__pupil {
+  transform: translate(var(--idle-x, 0px), var(--idle-y, 0px));
+}
+
+[data-char-state="idle"] .char__pupil-glint {
+  transform: translate(var(--idle-x, 0px), var(--idle-y, 0px));
+}
+
+/* ─── Contact Form Wrap — glassmorphism container ────────────── */
+.contact-form-wrap {
+  position: relative;
+  width: 100%;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(245, 197, 24, 0.12);
+  border-radius: var(--radius);
+  padding: clamp(28px, 4vw, 48px);
+  box-shadow:
+    0 0 60px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(245, 197, 24, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+}
+
+/* Subtle gold gradient line at top */
+.contact-form-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.4;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.contact-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-form__label {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.contact-form__input,
+.contact-form__textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-light);
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+  letter-spacing: 0.01em;
+}
+
+.contact-form__textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.7;
+}
+
+.contact-form__input::placeholder,
+.contact-form__textarea::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+  font-family: var(--font-body);
+}
+
+.contact-form__input:focus,
+.contact-form__textarea:focus {
+  border-color: rgba(245, 197, 24, 0.4);
+  box-shadow: 0 0 0 3px rgba(245, 197, 24, 0.08), 0 0 20px rgba(245, 197, 24, 0.04);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Submit button */
+.contact-form__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 36px;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #000;
+  background: var(--gold);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  margin-top: 8px;
+  align-self: flex-start;
+}
+
+.contact-form__btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.contact-form__btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(245, 197, 24, 0.25);
+}
+
+.contact-form__btn:hover::before {
+  opacity: 1;
+}
+
+.contact-form__btn:active {
+  transform: translateY(0);
+}
+
+.contact-form__btn-arrow {
+  transition: transform 0.3s ease;
+  font-size: 1.1em;
+}
+
+.contact-form__btn:hover .contact-form__btn-arrow {
+  transform: translateX(4px);
+}
+
+/* Success overlay */
+.contact-form__success {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 10;
+}
+
+.contact-form__success.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.contact-form__success-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 900;
+  animation: successPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1;
+}
+
+@keyframes successPop {
+  0% {
+    transform: scale(0);
+  }
+
+  60% {
+    transform: scale(1.15);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.contact-form__success-text {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  color: var(--text-light);
+  text-align: center;
+}
+
+
+/* ══════════════════════════════════════════════════════════════
    RESPONSIVE
    ══════════════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
@@ -1535,6 +2411,18 @@ body {
   .hero__badge {
     display: none;
   }
+
+  .contact-chars {
+    max-width: 280px;
+  }
+
+  .contact-form-wrap {
+    padding: 24px 20px;
+  }
+
+  .contact-form__btn {
+    width: 100%;
+  }
 }
 
 
@@ -1551,4 +2439,35 @@ body {
   .hero__scroll {
     display: none;
   }
+}
+
+/* =================================================================
+   FORCED OVERRIDE: LAYOUT & CHARACTERS
+   ================================================================= */
+@media (min-width: 769px) {
+  .contact__layout {
+    display: flex !important;
+    gap: 40px !important;
+    flex-direction: row !important;
+    /* Force Left Chars, Right Form */
+    align-items: center !important;
+    justify-content: center !important;
+    max-width: 1100px !important;
+    margin: 0 auto !important;
+  }
+
+  .contact-chars {
+    order: 1 !important;
+    /* Visual Order: 1 */
+    margin-right: 0 !important;
+    flex: 0 0 300px !important;
+    /* Give them space */
+  }
+
+  .contact-form-wrap {
+    order: 2 !important;
+    /* Visual Order: 2 */
+    flex: 1 !important;
+  }
+}
 }
