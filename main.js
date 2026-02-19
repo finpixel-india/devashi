@@ -101,10 +101,10 @@ if (hero) {
     }, { passive: true });
 
     hero.addEventListener('touchmove', (e) => {
-        e.preventDefault();
+        // e.preventDefault(); // allow scrolling
         const t = e.touches[0];
         onPointerMove(t.clientX, t.clientY);
-    }, { passive: false });
+    }, { passive: true });
 
     hero.addEventListener('touchend', () => {
         state.hovering = false;
